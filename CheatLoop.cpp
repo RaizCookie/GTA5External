@@ -14,7 +14,6 @@ CheatLoop::CheatLoop(ProcessManager &procManager, std::map<std::string, unsigned
 
 void CheatLoop::startMainThread(std::vector<std::string> &arguments){
     bool god = false;
-    std::string temp = "";
 
     while(arguments.at(0) != "exit") {
         if(god) {
@@ -26,19 +25,14 @@ void CheatLoop::startMainThread(std::vector<std::string> &arguments){
         }
 
         if(arguments.at(0) == "god"){
-            if(!god){
-                god = true;
-                temp = "activated";
-            } else {
-                god = false;
-                temp = "deactivated";
-            }
-
-            printf("Godmode %s\n", temp.c_str());
-            
-        }
+            god = !god;
+            printf("Godmode %s\n", god ? "activated" : "deactivated");
+       }
+       else if(arguments.at(0) == "info") {
+            printf("Worldptr: %lu\nBlipptr: %lu\n", pointer.at("world"), pointer.at("coords"));
+       }
         else if(arguments.at(0) == "full"){
-            Player::writeArmor(procManager, pointer.at("world"), 200);
+            Player::writeArmor(procManager, pointer.at("world"), 100);
             Player::writeHealth(procManager, pointer.at("world"), Player::readMaxHealth(procManager, pointer.at("world")));
         }
         else if(arguments.at(0) == "wanted"){
@@ -70,6 +64,7 @@ void CheatLoop::startMainThread(std::vector<std::string> &arguments){
         }
         else if(arguments.at(0) == "lockon") {
             Vehicle::toggleLockon(procManager, procManager.FindDMAAddy(pointer.at("world"), {OFFSET_PLAYER, OFFSET_PLAYER_VEHICLE}));
+            printf("Lockon status: %s\n", Vehicle::readLockon(procManager, procManager.FindDMAAddy(pointer.at("world"), {OFFSET_PLAYER, OFFSET_PLAYER_VEHICLE})) ? "\033[1;31mtrue\033[0m" : "\033[1;32mfalse\033[0m"); // Testing purpose
         }
         
         arguments.clear();

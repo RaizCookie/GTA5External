@@ -6,7 +6,7 @@ class Player {
 public:
     static float readHealth(ProcessManager &procManager, unsigned long worldPtr);
     static float readMaxHealth(ProcessManager &procManager, unsigned long worldPtr);	
-    static float readArmor(ProcessManager &procManager, unsigned long worldPtr);
+    static float readArmor(ProcessManager &procManager, unsigned long worldPtr);	
 
     static bool isGodmode(ProcessManager &procManager, unsigned long worldPtr);
 

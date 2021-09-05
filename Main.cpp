@@ -14,11 +14,11 @@ int main(int argc, char *argv[])
     ProcessManager procManager("GTA5.exe", "GTA5.exe");
     
     printf("%p\t ->\t %p\n", (void *)procManager.TargetBaseAddress, (void *)procManager.ModuleSize);
-    printf("Scanning for Pointers...\n");
+    printf("[INFO] Scanning for Pointers...\n");
 
     std::map<std::string, unsigned long> pointer;
     pointer.insert(std::pair<std::string, unsigned long>("world", GTAMemory::scanWorldPtr(procManager)));
-    pointer.insert(std::pair<std::string, unsigned long>("coords", 0x141faf560)); 
+    pointer.insert(std::pair<std::string, unsigned long>("coords", GTAMemory::scanBlipPtr(procManager))); // Not working?
 
     CheatLoop cheatLoop(procManager, pointer);
     cheatLoop.start();

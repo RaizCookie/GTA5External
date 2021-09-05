@@ -15,7 +15,7 @@ unsigned long GTAMemory::scanWorldPtr(ProcessManager &procManager){
 
 unsigned long GTAMemory::scanBlipPtr(ProcessManager &procManager){
 
-    unsigned long preBlip = procManager.SignaturePayload(blipSignature, blipMask, nullptr, strlen(blipMask), 0, 8, 0);
+    unsigned long preBlip = procManager.SignaturePayload(blipSignature, blipMask, nullptr, strlen(blipMask), 0, 8);
     unsigned long BlipPtr = 0xDEADBEEF;
     procManager.ReadProcessMemory((void*)(preBlip), &BlipPtr, 4);
     return BlipPtr;
