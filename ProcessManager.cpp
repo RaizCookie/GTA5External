@@ -140,7 +140,7 @@ unsigned long ProcessManager::SignaturePayload(const char *signature, const char
         }
         if (found) {
             addr = ((TargetBaseAddress+i)+sigoffset);
-            printf("[INFO] SignaturePayload: Signature found -> %p\n", (void*)addr);
+            Logger::log("INFO", "SignaturePayload: Signature found -> " + int_to_hex(addr), LogType::PASSED);
             
             break;
         }
@@ -242,7 +242,7 @@ ProcessManager::ProcessManager(const char *szProcessName, const char *module) {
 
             // Check if process is correct
             if(strstr(FileBuffer, ProcessNameString) != NULL) {
-                printf("[INFO] ProcessManager: Process %s:%s found!\n", ProcessNameString, DirectoryObject->d_name);
+                Logger::log("INFO", "ProcessManager: Process " + std::string(ProcessNameString) + ":" + std::string(DirectoryObject->d_name) + " found!", LogType::PASSED);
                 ProcessID = atol(DirectoryObject->d_name);
 
                 // Unlock target memory

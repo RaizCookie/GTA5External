@@ -6,7 +6,7 @@
 
 ## Building
 
-> Linux `g++ -pthread Main.cpp Structs/Player.cpp Structs/Vehicle.cpp GTAMemory.cpp CheatLoop.cpp ProcessManager.cpp -o GTA5Ext`
+> Linux `g++ -pthread Main.cpp Structs/Player.cpp Structs/Vehicle.cpp Utils/Logger.cpp GTAMemory.cpp CheatLoop.cpp ProcessManager.cpp -o GTA5Ext`
 
 ## Running
 

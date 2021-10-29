@@ -3,6 +3,7 @@
 #include "GTAMemory.h"
 #include "Structs/Player.h"
 #include "Structs/Vehicle.h"
+#include "Utils/Logger.h"
 #include <thread>
 #include <functional>
 #include <sstream>

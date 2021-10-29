@@ -26,10 +26,11 @@ void CheatLoop::startMainThread(std::vector<std::string> &arguments){
 
         if(arguments.at(0) == "god"){
             god = !god;
-            printf("Godmode %s\n", god ? "activated" : "deactivated");
+            Logger::log("STATUS", "Godmode", LogType::STATUS, god);
        }
        else if(arguments.at(0) == "info") {
-            printf("Worldptr: %lu\nBlipptr: %lu\n", pointer.at("world"), pointer.at("coords"));
+            Logger::log("INFO", "Worldptr:" + pointer.at("world"), LogType::INFO);
+            //Logger::log("INFO", "Blipptr:" + pointer.at("coords"), LogType::INFO);
        }
         else if(arguments.at(0) == "full"){
             Player::writeArmor(procManager, pointer.at("world"), 100);
@@ -64,7 +65,10 @@ void CheatLoop::startMainThread(std::vector<std::string> &arguments){
         }
         else if(arguments.at(0) == "lockon") {
             Vehicle::toggleLockon(procManager, procManager.FindDMAAddy(pointer.at("world"), {OFFSET_PLAYER, OFFSET_PLAYER_VEHICLE}));
-            printf("Lockon status: %s\n", Vehicle::readLockon(procManager, procManager.FindDMAAddy(pointer.at("world"), {OFFSET_PLAYER, OFFSET_PLAYER_VEHICLE})) ? "\033[1;31mtrue\033[0m" : "\033[1;32mfalse\033[0m"); // Testing purpose
+            Logger::log("STATUS", "AntiLockon:", LogType::STATUS, !Vehicle::readLockon(procManager, procManager.FindDMAAddy(pointer.at("world"), {OFFSET_PLAYER, OFFSET_PLAYER_VEHICLE})));
+        }
+        else if (!arguments.at(0).empty()) {
+            Logger::log("WARNING", "Command not found!", LogType::WARN);
         }
         
         arguments.clear();
@@ -79,10 +83,14 @@ bool CheatLoop::start(){
 
     std::thread t1(&CheatLoop::startMainThread, this, std::ref(arguments));
 
+    Logger::log("COMMAND", "", LogType::COMMAND);
     while(arguments.at(0) != "exit") {
         std::getline(std::cin, line);
         std::transform(line.begin(), line.end(), line.begin(), ::tolower);
         arguments = split(line, ' ');
+        usleep(100);
+        if(arguments.at(0) != "exit")
+            Logger::log("COMMAND", "", LogType::COMMAND);
     }
 
     t1.join();
