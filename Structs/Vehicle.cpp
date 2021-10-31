@@ -14,6 +14,12 @@
         return acceleration;
     }
 
+    float Vehicle::readSpeed(ProcessManager &procManager, unsigned long vehiclePtr){
+        Vector3 speed = {0.0, 0.0, 0.0};
+        procManager.ReadProcessMemory((void*)procManager.FindDMAAddy(vehiclePtr, {OFFSET_VEHICLE_SPEED_VECTOR}), &speed, sizeof(speed));
+        return std::sqrt((std::pow(speed.x, 2) + std::pow(speed.y, 2) + std::pow(speed.z, 2)));
+    }
+
     bool Vehicle::writeHealth(ProcessManager &procManager, unsigned long vehiclePtr, float health){
         return procManager.WriteProcessMemory(procManager.FindDMAAddy(vehiclePtr, {OFFSET_VEHICLE_HEALTH}), &health, sizeof(health));
 

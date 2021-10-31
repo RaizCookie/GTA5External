@@ -87,6 +87,10 @@ void CheatLoop::startMainThread(std::vector<std::string> &arguments){
              " - range -> " + std::to_string(range) + " - recoil -> " + std::to_string(recoil) + 
              " - reloadMultiplier -> " + std::to_string(reloadMultiplier), LogType::PASSED);
         }
+        else if(arguments.at(0) == "speed") {
+            float speed = Vehicle::readSpeed(procManager, procManager.FindDMAAddy(pointer.at("world"), {OFFSET_PLAYER, OFFSET_PLAYER_VEHICLE}));
+            Logger::log("INFO", "Current speed: " + std::to_string(speed*3.6/*0.621*/)+ " kph", LogType::PASSED);
+        }
         else if (!arguments.at(0).empty()) {
             Logger::log("WARNING", "Command not found!", LogType::WARN);
         }

@@ -80,7 +80,8 @@
 #define	OFFSET_VEHICLE_CUSTOM_TYRE_SMOKE_B			0x3FE			//btTyreSmokeBlue
 #define	OFFSET_VEHICLE_CUSTOM_LIMO_WINDOWS			0x3FF			//btLimoWindows; 0x1 = on
 #define OFFSET_VEHICLE_MODEL_INFO_JUMP_ROCK			0x58B			//btJumpOrRock; 0x0 = off; 0x20 = JumpingCar; 0x40 = RocketBoot;  0x42 = Oppressor;
- 
+#define OFFSET_VEHICLE_SPEED_VECTOR                 0x7F0
+
 //weapon offsets
 #define OFFSET_WEAPON_MANAGER			0x10D8			//from playerbase
 #define OFFSET_WEAPON_CURRENT			0x20			//from weapon manager
