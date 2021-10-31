@@ -3,6 +3,7 @@
 #include "GTAMemory.h"
 #include "Structs/Player.h"
 #include "Structs/Vehicle.h"
+#include "Structs/Weapon.h"
 #include "Utils/Logger.h"
 #include <thread>
 #include <functional>

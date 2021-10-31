@@ -29,8 +29,8 @@ void CheatLoop::startMainThread(std::vector<std::string> &arguments){
             Logger::log("STATUS", "Godmode", LogType::STATUS, god);
        }
        else if(arguments.at(0) == "info") {
-            Logger::log("INFO", "Worldptr:" + pointer.at("world"), LogType::INFO);
-            //Logger::log("INFO", "Blipptr:" + pointer.at("coords"), LogType::INFO);
+            Logger::log("INFO", "Worldptr -> " + std::to_string(pointer.at("world")), LogType::INFO);
+            Logger::log("INFO", "Blipptr -> " + std::to_string(pointer.at("coords")), LogType::INFO);
        }
         else if(arguments.at(0) == "full"){
             Player::writeArmor(procManager, pointer.at("world"), 100);
@@ -66,6 +66,26 @@ void CheatLoop::startMainThread(std::vector<std::string> &arguments){
         else if(arguments.at(0) == "lockon") {
             Vehicle::toggleLockon(procManager, procManager.FindDMAAddy(pointer.at("world"), {OFFSET_PLAYER, OFFSET_PLAYER_VEHICLE}));
             Logger::log("STATUS", "AntiLockon:", LogType::STATUS, !Vehicle::readLockon(procManager, procManager.FindDMAAddy(pointer.at("world"), {OFFSET_PLAYER, OFFSET_PLAYER_VEHICLE})));
+        }
+        else if(arguments.at(0) == "weapon") {
+            float damage = 1000;
+            float range = 1000;
+            float recoil = 0;
+            float reloadMultiplier = 3;
+            if(arguments.size() > 4) {
+                damage = std::stof(arguments.at(1));
+                range = std::stof(arguments.at(2));
+                recoil = std::stof(arguments.at(3));
+                reloadMultiplier = std::stof(arguments.at(4));
+            }
+            Weapon::writeDamage(procManager, pointer.at("world"), damage);
+            Weapon::writeRange(procManager, pointer.at("world"), range);
+            Weapon::writeRecoil(procManager, pointer.at("world"), recoil);
+            Weapon::writeReloadMultiplier(procManager, pointer.at("world"), reloadMultiplier);
+            
+            Logger::log("WEAPON", "Weapon modified - damage -> " + std::to_string(damage) +
+             " - range -> " + std::to_string(range) + " - recoil -> " + std::to_string(recoil) + 
+             " - reloadMultiplier -> " + std::to_string(reloadMultiplier), LogType::PASSED);
         }
         else if (!arguments.at(0).empty()) {
             Logger::log("WARNING", "Command not found!", LogType::WARN);
