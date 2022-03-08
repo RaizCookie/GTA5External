@@ -128,7 +128,7 @@ void CheatLoop::startMainThread(std::vector<std::string> &arguments){
             }
         }
         if(!arguments.at(0).empty() && !commandExists) {
-            Logger::log("WARNING", "Command not found!", LogType::INFO);
+            Logger::log("WARNING", "Command not found!", LogType::WARN);
         }
         
         arguments.clear();
