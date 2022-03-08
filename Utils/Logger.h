@@ -14,8 +14,8 @@ enum class LogType {
 	UNEXPECTED = 13
 #else
 	NORMAL = 37,
-	INFO = 33,
-    COMMAND = 31,
+	INFO = 34,
+    COMMAND = 35,
 	WARN = 33,
 	ERR = 31,
 	PASSED = 32,

@@ -30,7 +30,7 @@ void CheatLoop::startMainThread(std::vector<std::string> &arguments){
        }
        else if(arguments.at(0) == "info") {
             Logger::log("INFO", "Worldptr -> " + std::to_string(pointer.at("world")), LogType::INFO);
-            Logger::log("INFO", "Blipptr -> " + std::to_string(pointer.at("coords")), LogType::INFO);
+            //Logger::log("INFO", "Blipptr -> " + std::to_string(pointer.at("coords")), LogType::INFO);
        }
         else if(arguments.at(0) == "full"){
             Player::writeArmor(procManager, pointer.at("world"), 100);
