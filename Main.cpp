@@ -12,6 +12,12 @@ int main(int argc, char *argv[])
     //TODO: CMake? Make file?
 
     ProcessManager procManager("GTA5.exe", "GTA5.exe");
+
+    if(procManager.TargetBaseAddress == 0x0) {
+        Logger::log("ERROR", "Module Range equals zero. Is GTA5.exe running? ", LogType::ERR);
+        procManager.~ProcessManager();
+        return -1;
+    }
     
     Logger::log("INFO", "Module Range: " + int_to_hex(procManager.TargetBaseAddress) + " -> " + int_to_hex(procManager.ModuleSize), LogType::INFO);
     Logger::log("INFO", "Scanning for Pointers...", LogType::INFO);
