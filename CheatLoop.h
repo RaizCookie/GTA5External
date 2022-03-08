@@ -16,6 +16,18 @@ class CheatLoop {
     public:
         CheatLoop(ProcessManager &procManager, std::map<std::string, unsigned long> pointer);
         bool start();
+        void getPointer(void *data);
+        bool god = false;
+        void toggleGod(void *data);
+        void heal(void *data);
+        void setWanted(void *data);
+        void vHealth(void *data);
+        void setRagdoll(void *data);
+        void setRunSpeed(void *data);
+        void setPosition(void *data);
+        void setLockOn(void *data);
+        void editWeaponMods(void *data);
+        void speed(void *data);
     private:
         ProcessManager procManager;
         std::map<std::string, unsigned long> pointer;
