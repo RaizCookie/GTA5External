@@ -34,11 +34,17 @@ void CheatLoop::setWanted(void *data) {
 }
 void CheatLoop::setRunSpeed(void *data) {
     std::vector<std::string> arguments = *reinterpret_cast<std::vector<std::string>*>(data);
-    Player::writeRunSpeed(procManager, pointer.at("world"), std::stof(arguments.at(1)));
+    if(arguments.size() > 1)
+        Player::writeRunSpeed(procManager, pointer.at("world"), std::stof(arguments.at(1)));
+    else
+        Logger::log("ERROR", "Too few arguments!", LogType::ERR);
 }
 void CheatLoop::setSwimSpeed(void *data) {
     std::vector<std::string> arguments = *reinterpret_cast<std::vector<std::string>*>(data);
-    Player::writeSwimSpeed(procManager, pointer.at("world"), std::stof(arguments.at(1)));
+    if(arguments.size() > 1)
+        Player::writeSwimSpeed(procManager, pointer.at("world"), std::stof(arguments.at(1)));
+    else
+        Logger::log("ERROR", "Too few arguments!", LogType::ERR);
 }
 void CheatLoop::vHealth(void *data) {
     std::vector<std::string> arguments = *reinterpret_cast<std::vector<std::string>*>(data);
