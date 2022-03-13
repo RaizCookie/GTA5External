@@ -24,6 +24,7 @@ class CheatLoop {
         void vHealth(void *data);
         void setRagdoll(void *data);
         void setRunSpeed(void *data);
+        void setSwimSpeed(void *data);
         void setPosition(void *data);
         void setLockOn(void *data);
         void editWeaponMods(void *data);

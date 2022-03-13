@@ -36,6 +36,10 @@ void CheatLoop::setRunSpeed(void *data) {
     std::vector<std::string> arguments = *reinterpret_cast<std::vector<std::string>*>(data);
     Player::writeRunSpeed(procManager, pointer.at("world"), std::stof(arguments.at(1)));
 }
+void CheatLoop::setSwimSpeed(void *data) {
+    std::vector<std::string> arguments = *reinterpret_cast<std::vector<std::string>*>(data);
+    Player::writeSwimSpeed(procManager, pointer.at("world"), std::stof(arguments.at(1)));
+}
 void CheatLoop::vHealth(void *data) {
     std::vector<std::string> arguments = *reinterpret_cast<std::vector<std::string>*>(data);
     Vehicle::writeHealth(procManager, procManager.FindDMAAddy(pointer.at("world"), {OFFSET_PLAYER, OFFSET_PLAYER_VEHICLE}), std::stof(arguments.at(1)));
@@ -99,6 +103,7 @@ static cmds commands[] = {
     {"wanted", &CheatLoop::setWanted},
     {"ragdoll", &CheatLoop::setRagdoll},
     {"run", &CheatLoop::setRunSpeed},
+    {"swim", &CheatLoop::setSwimSpeed},
     {"vhealth", &CheatLoop::vHealth},
     {"lockon", &CheatLoop::setLockOn},
     {"weapon", &CheatLoop::editWeaponMods},
