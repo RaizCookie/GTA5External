@@ -21,7 +21,7 @@ void CheatLoop::getPointer(void *data) {
     //Logger::log("INFO", "Blipptr -> " + std::to_string(pointer.at("coords")), LogType::INFO);
 }
 void CheatLoop::toggleGod(void *data) {
-    CheatLoop::god = !CheatLoop::god;
+    god = !god;
     Logger::log("STATUS", "Godmode", LogType::STATUS, CheatLoop::god);
 }
 void CheatLoop::heal(void *data) {
@@ -108,7 +108,6 @@ static cmds commands[] = {
 CheatLoop::CheatLoop(ProcessManager &procManager, std::map<std::string, unsigned long> pointer) : procManager(procManager), pointer(pointer){}
 
 void CheatLoop::startMainThread(std::vector<std::string> &arguments){
-    bool god = false;
 
     while(arguments.at(0) != "exit") {
         if(god) {

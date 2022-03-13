@@ -16,8 +16,8 @@ class CheatLoop {
     public:
         CheatLoop(ProcessManager &procManager, std::map<std::string, unsigned long> pointer);
         bool start();
-        void getPointer(void *data);
         bool god = false;
+        void getPointer(void *data);
         void toggleGod(void *data);
         void heal(void *data);
         void setWanted(void *data);
