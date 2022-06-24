@@ -1,5 +1,12 @@
 #pragma once
 #include "Utils/Logger.h"
+
+#include <iostream>
+#include <sstream>
+#include <string>
+#include <fstream>
+#include <istream>
+
 #include <stdio.h>      // Input/Output
 #include <stdlib.h>     // Standard Library
 #include <string.h> 

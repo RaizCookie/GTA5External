@@ -3,18 +3,21 @@
 // Find base address of memory to start searching for signature
 //
 // Default base address will be the first executable region
-
 long ProcessManager::FindBaseAddress(const char *module) {
     int fd = 0;
-    char FileLocation[1024]; // File location to read memory modules
+
+    std::string FileLocation;
+
     char BaseAddress[1024];
     char LastAddress[1024];
     char *ptr = NULL;
 
-    sprintf(FileLocation, "/proc/%lu/maps", ProcessID);
+    std::ostringstream out;
+    out << "/proc/" << ProcessID << "/maps";
+    FileLocation = out.str();
 
     // Open file and creating FileDescriptor
-    if ((fd = open(FileLocation, O_RDONLY)) < 0) {
+    if ((fd = open(FileLocation.c_str(), O_RDONLY)) < 0) {
         fprintf(stderr, "[ERROR] ProcessManager: Failed to find process base address\n");
         return false;
     }
