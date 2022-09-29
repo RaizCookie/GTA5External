@@ -28,7 +28,7 @@
 #define OFFSET_PLAYER_RAGDOLL					0x10B8			//byte; CPed.noRagdoll: 0x20 = off; 0x00/0x01 = on
 #define OFFSET_PLAYER_SEATBELT					0x140C			//byte; CPed.seatBelt: 0xC8 = off; 0xC9 = on
 #define OFFSET_PLAYER_INVEHICLE					0x1477
-#define OFFSET_PLAYER_ARMOR						0x14E0			//armour
+#define OFFSET_PLAYER_ARMOR						0x1530			//armor
 #define OFFSET_PLAYER_WATER_PROOF				0x188			//water proof; DWORD; +0x1000000 = on
 #define OFFSET_PLAYER_VEHICLE_DAMAGE_MP			0xD1C			//super punck/kick;float;
  
