@@ -24,7 +24,6 @@ int main(int argc, char *argv[])
 
     std::map<std::string, unsigned long> pointer;
     pointer.insert(std::pair<std::string, unsigned long>("world", GTAMemory::scanWorldPtr(procManager)));
-    //pointer.insert(std::pair<std::string, unsigned long>("coords", GTAMemory::scanBlipPtr(procManager))); // Not working?
 
     CheatLoop cheatLoop(procManager, pointer);
     cheatLoop.start();

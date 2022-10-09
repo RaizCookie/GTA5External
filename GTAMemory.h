@@ -3,7 +3,6 @@
 
 struct Vector3{
 	float x, y, z;
-	Vector3() {}
 	Vector3(float _x, float _y, float _z) {
 		x = _x;
 		y = _y;
@@ -19,6 +18,5 @@ private:
 	static char blipMask[];
 public:
     static unsigned long scanWorldPtr(ProcessManager &procManager);
-	static unsigned long scanBlipPtr(ProcessManager &procManager);
 
 };
