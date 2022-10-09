@@ -37,7 +37,7 @@ public:
     ProcessManager(const char *szProcessName, const char *module = NULL);
     ~ProcessManager();
 
-    unsigned long SignaturePayload(const char *signature, const char *mask, char *payload, const int siglen, const int paylen, const int bsize, unsigned long sigoffset = 0);
+    unsigned long ScanSignature(unsigned char signature[], const char *mask, unsigned long sigoffset = 0);
     ulong FindDMAAddy(ulong ptr, std::vector<unsigned int> offsets);
     bool WriteProcessMemory(unsigned long address, void *buffer, unsigned int size);
 

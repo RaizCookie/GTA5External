@@ -119,32 +119,30 @@ long ProcessManager::FindBaseAddress(const char *module) {
 
 // Function will automatically search for signature and write payload
 
-unsigned long ProcessManager::SignaturePayload(const char *signature, const char *mask, char *payload, const int siglen, const int paylen, const int bsize, unsigned long sigoffset) {
+unsigned long ProcessManager::ScanSignature(unsigned char signature[], const char *mask, unsigned long sigoffset) {
     
     unsigned long addr = 0xDEADBEEF;
     
-    char *buf = (char *)malloc(siglen * bsize);
-    if (buf == NULL) {
-        fprintf(stderr, "[ERROR] SignaturePayload: Failed to create buffer!\n");
-        exit(EXIT_FAILURE);
-    }
-    
     int patternLen = strlen(mask);
-    unsigned long size = ModuleSize - TargetBaseAddress-0x601;
+    unsigned long size = ModuleSize - TargetBaseAddress;
     
+    std::vector<unsigned char> buffer(size);
+    if(!ReadProcessMemory((void*)TargetBaseAddress, buffer.data(), buffer.size())) {
+        Logger::log("ERROR", "Was not able to read memory", LogType::ERR);
+        return 0;
+    }
+
     for (unsigned long i = 0; i < size; i++) {
-        ReadProcessMemory((void*)(TargetBaseAddress + i), buf, siglen * bsize);
         bool found = true;
         for (int j = 0; j < patternLen; j++) {
-            if (mask[j] != '?' && signature[j] != *(char*)(buf+j)) {
+            if (mask[j] != '?' && signature[j] != buffer.at(i+j)) {
                 found = false;
                 break;
             }
         }
         if (found) {
-            addr = ((TargetBaseAddress+i)+sigoffset);
-            Logger::log("SUCCESS", "SignaturePayload: Signature found -> " + int_to_hex(addr), LogType::PASSED);
-            
+            addr = (TargetBaseAddress+i + sigoffset);
+            Logger::log("SUCCESS", "Signature found at: " + int_to_hex(addr), LogType::PASSED);
             break;
         }
     }
@@ -195,6 +193,7 @@ ProcessManager::ProcessManager(const char *szProcessName, const char *module) {
         fprintf(stderr, "[ERROR] ProcessManager: Process name is to long...\n");
         exit(EXIT_FAILURE);
     }
+
 
     // Copy string to private class buffer
     strcpy(ProcessNameString, szProcessName);

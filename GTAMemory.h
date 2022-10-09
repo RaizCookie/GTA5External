@@ -12,10 +12,8 @@ struct Vector3{
 
 class GTAMemory {
 private:
-    static const char worldSignature[];
-	static const char blipSignature[];
+    static unsigned char worldSignature[];
     static char worldMask[];
-	static char blipMask[];
 public:
     static unsigned long scanWorldPtr(ProcessManager &procManager);
 
